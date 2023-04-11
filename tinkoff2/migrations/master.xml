@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+    <changeSet id="create-links-table" author="John">
+        <createTable tableName="links">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="url" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP">
+                <constraints nullable="false" defaultValueComputed="NOW()"/>
+            </column>
+        </createTable>
+        <comment>Creates the links table</comment>
+    </changeSet>
+
+    <changeSet id="create-chats-table" author="John">
+        <createTable tableName="chats">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <comment>Creates the chats table</comment>
+    </changeSet>
+
+    <changeSet id="create-link-chat-table" author="John">
+        <createTable tableName="link_chat">
+            <column name="link_id" type="BIGINT">
+                <constraints nullable="false"/>
+                <foreignKeyConstraint baseColumnNames="link_id" baseTableName="links"
+                                      referencedColumnNames="id" referencedTableName="links"/>
+            </column>
+            <column name="chat_id" type="BIGINT">
+                <constraints nullable="false"/>
+                <foreignKeyConstraint baseColumnNames="chat_id" baseTableName="chats"
+                                      referencedColumnNames="id" referencedTableName="chats"/>
+            </column>
+            <constraints primaryKey="true" primaryKeyName="pk_link_chat">
+                <uniqueConstraint uniqueConstraintName="uk_link_chat_link_id_chat_id" columnNames="link_id,chat_id"/>
+            </constraints>
+        </createTable>
+        <comment>Creates the link_chat table</comment>
+    </changeSet>
+
+</databaseChangeLog>
