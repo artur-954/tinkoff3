@@ -1,0 +1,20 @@
+CREATE TABLE Links (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  url VARCHAR(255) NOT NULL,
+  description TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE Chats (
+  id INT PRIMARY KEY,
+  chat_type VARCHAR(20) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE Link_Chat (
+  link_id INT,
+  chat_id INT,
+  PRIMARY KEY (link_id, chat_id),
+  FOREIGN KEY (link_id) REFERENCES Links(id) ON DELETE CASCADE,
+  FOREIGN KEY (chat_id) REFERENCES Chats(id) ON DELETE CASCADE
+);

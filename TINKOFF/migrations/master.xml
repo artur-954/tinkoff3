@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.10"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.10
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.10.xsd">
+
+    <changeSet author="yourname" id="create_tables">
+        <createTable tableName="Links">
+            <column name="id" type="INT">
+                <constraints primaryKey="true" autoIncrement="true"/>
+            </column>
+            <column name="url" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="TEXT"/>
+            <column name="created_at" type="TIMESTAMP">
+                <constraints defaultValueDate="${now}" nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="Chats">
+            <column name="id" type="INT">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="chat_type" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP">
+                <constraints defaultValueDate="${now}" nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="Link_Chat">
+            <column name="link_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="chat_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <constraints primaryKey="true" unique="true">
+                <primaryKey columnNames="link_id,chat_id"/>
+            </constraints>
+            <constraints>
+                <foreignKey columnNames="link_id" referencedTableName="Links" referencedColumnNames="id" onDelete="CASCADE"/>
+                <foreignKey columnNames="chat_id" referencedTableName="Chats" referencedColumnNames="id" onDelete="CASCADE"/>
+            </constraints>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
