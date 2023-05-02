@@ -5,4 +5,16 @@ import org.springframework.validation.annotation.Validated;
 
 @Validated
 @ConfigurationProperties(prefix = "app", ignoreUnknownFields = false)
-public record ApplicationConfig(@NotNull String test) {}
+public record ApplicationConfig(@NotNull String test) {
+    public String getExchangeName() {
+        return "ExchangeName";
+    }
+
+    public String getQueueName() {
+        return "QueueName";
+    }
+
+    public String getRoutingKey() {
+        return "RoutingKey";
+    }
+}
