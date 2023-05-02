@@ -17,4 +17,16 @@ public record ApplicationConfig(@NotNull String test) {
     public String getRoutingKey() {
         return "RoutingKey";
     }
+
+    public String getBotUrl() {
+        return "BotUrl";
+    }
+
+    public String getChatId() {
+        return "ChatId";
+    }
+
+    public boolean isUseQueue() {
+        return true;
+    }
 }
