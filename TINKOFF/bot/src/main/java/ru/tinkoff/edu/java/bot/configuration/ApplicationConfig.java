@@ -13,5 +13,17 @@ public record ApplicationConfig(@NotNull String test) {
         return Optional.ofNullable(System.getenv(TELEGRAM_BOT_TOKEN_KEY))
                 .orElseThrow(() -> new IllegalStateException("Проблемы с токеном"));
     }
+
+    public String getExchangeName() {
+        return "ExchangeName";
+    }
+
+    public String getQueueName() {
+        return "QueueName";
+    }
+
+    public String getRoutingKey() {
+        return "RoutingKey";
+    }
 }
 
