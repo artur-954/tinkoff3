@@ -1,0 +1,15 @@
+bot:
+  test: Привет! (bot)
+springdoc:
+  swagger-ui:
+    path: "/swagger-ui"
+rabbitmq:
+  exchange-name: my-exchange
+  queue-name: my-queue
+  routing-key: my-routing-key
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest

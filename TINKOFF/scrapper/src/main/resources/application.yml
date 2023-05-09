@@ -1,0 +1,19 @@
+scrapper:
+  test: привет (scrapper)
+springdoc:
+  swagger-ui:
+    path: "/swagger-ui"
+client:
+  base-url:
+    github: "https://api.github.com"
+    stackoverflow: "https://api.stackexchange.com/2.3"
+rabbitmq:
+  exchange-name: my-exchange
+  queue-name: my-queue
+  routing-key: my-routing-key
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
