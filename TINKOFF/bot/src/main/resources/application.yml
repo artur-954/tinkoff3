@@ -13,3 +13,22 @@ spring:
     port: 5672
     username: guest
     password: guest
+name: Bot Build
+
+on:
+  push:
+    paths:
+      - 'bot/**'
+  pull_request:
+    paths:
+      - 'bot/**'
+
+jobs:
+  build:
+    name: Build Bot
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build Bot
+        run: mvn package -pl bot -am
