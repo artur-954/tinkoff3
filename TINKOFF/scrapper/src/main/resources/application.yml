@@ -1,0 +1,45 @@
+scrapper:
+  test: привет (scrapper)
+springdoc:
+  swagger-ui:
+    path: "/swagger-ui"
+client:
+  base-url:
+    github: "https://api.github.com"
+    stackoverflow: "https://api.stackexchange.com/2.3"
+rabbitmq:
+  exchange-name: my-exchange
+  queue-name: my-queue
+  routing-key: my-routing-key
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+name: Scrapper Build
+
+on:
+  push:
+    paths:
+      - 'scrapper/**'
+  pull_request:
+    paths:
+      - 'scrapper/**'
+
+jobs:
+  build:
+    name: Build Scrapper
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build Scrapper
+        run: mvn package -pl scrapper -am
+      - name: Build Docker Image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: false
+          file: ./scrapper.Dockerfile
+          tags: scrapper:latest
