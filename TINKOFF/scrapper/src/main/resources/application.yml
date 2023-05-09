@@ -17,3 +17,22 @@ spring:
     port: 5672
     username: guest
     password: guest
+name: Scrapper Build
+
+on:
+  push:
+    paths:
+      - 'scrapper/**'
+  pull_request:
+    paths:
+      - 'scrapper/**'
+
+jobs:
+  build:
+    name: Build Scrapper
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build Scrapper
+        run: mvn package -pl scrapper -am
