@@ -8,6 +8,8 @@ rabbitmq:
   queue-name: my-queue
   routing-key: my-routing-key
 spring:
+  application:
+    name: my-application
   rabbitmq:
     host: localhost
     port: 5672
@@ -39,3 +41,30 @@ jobs:
           push: false
           file: ./bot.Dockerfile
           tags: bot:latest
+server:
+  port: 8081
+
+management:
+  endpoint:
+    health:
+      enabled: true
+    info:
+      enabled: true
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include:
+  server:
+    port: 8081
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+      tags:
+        application: ${spring.application.name}
+micrometer:
+  step: 1m
+
+
+
